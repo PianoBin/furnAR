@@ -44,13 +44,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func addObject(anchor: ARPlaneAnchor) {
-        let chair = Chair()
-        chair.loadModal()
         
-        chair.position = SCNVector3(anchor.center.x, 0, anchor.center.z)
-        chair.scale = SCNVector3(0.05, 0.05, 0.05)
+        let scene = SCNScene(named: "art.scnassets/chairs/ALCT2321/model.scn")!
         
-        sceneView.scene.rootNode.addChildNode(chair)
+        sceneView.scene = scene
+        
+        let node = SCNNode()
+        node.addChildNode(scene.rootNode?.childNode(withName: "model", recursively: true))
+        
+        //let chair = Chair()
+        //chair.loadModal()
+        
+        node.position = SCNVector3(anchor.center.x, 0, anchor.center.z)
+        node.scale = SCNVector3(0.05, 0.05, 0.05)
+        
+        sceneView.scene.rootNode.addChildNode(node)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
