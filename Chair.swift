@@ -11,7 +11,7 @@ import ARKit
 class Chair: SCNNode {
     
     func loadModal() {
-        guard let virtualOjectScene = SCNScene(named: "art.scnassets/ALCT2653/model.scn") else {return}
+        guard let virtualOjectScene = SCNScene(named: "art.scnassets/chairs/ALCT2321/model.scn") else {return}
         
         let wrapperNode = SCNNode()
         

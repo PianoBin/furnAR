@@ -41,16 +41,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Run the view's session
         sceneView.session.run(configuration)
-        
-        addObject()
     }
     
-    func addObject() {
+    func addObject(anchor: ARPlaneAnchor) {
         let chair = Chair()
         chair.loadModal()
         
-        chair.position = SCNVector3(0, 0, -0.2)
-        chair.scale = SCNVector3(0.1, 0.1, 0.1)
+        chair.position = SCNVector3(anchor.center.x, 0, anchor.center.z)
+        chair.scale = SCNVector3(0.05, 0.05, 0.05)
         
         sceneView.scene.rootNode.addChildNode(chair)
     }
@@ -86,6 +84,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // SCNPlanes are vertically oriented in their local coordinate space.
         // Rotate it to match the horizontal orientation of the ARPlaneAnchor.
         planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+        
+        addObject(anchor: anchor)
         
         return planeNode
     }
